@@ -1,0 +1,57 @@
+Developing and testing web applications in isolated environments is crucial to ensure they work flawlessly in both development and production environments. Docker containers provide an excellent solution for achieving this. In this article, we’ll walk you through the steps to develop and test a FastAPI app in real-time using Docker.
+
+This goal could be achieved easily in our local machine:
+
+uvicorn main:app --reload
+But what if we want to do the same in a docker container?
+
+Prerequisites:
+Before you start, make sure you have Docker installed. If not, you can follow the official Docker documentation for installation.
+
+Project Structure:
+
+Set up your project with the following structure:
+
+project_folder
+├── app
+│   └── main.py
+├── Dockerfile
+└── requirements.txt
+Step-by-Step Guide:
+Create a requirements.txt file and add the required libraries: fastapi and uvicorn.
+Create a Dockerfile with the following content:
+FROM python:3.11
+
+WORKDIR /code
+
+COPY ./requirements.txt /code/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+COPY ./app /code/app
+
+CMD ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "80"]
+The Dockerfile sets up a Python 3.11 base image, installs the project requirements, and runs the FastAPI app using Uvicorn.
+
+Create a basic FastAPI app in the main.py file:
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/hello/{name}")
+async def greeting(name: str):
+    return {"greeting": f"Hello {name}"}
+Build the Docker image for your project:
+docker build -t [your_project_name] .
+Real-time Development and Testing:
+To develop and test your app in real-time within the Docker container, we’ll use Docker volumes.
+
+When running the Docker container, you need to create a volume that links the local file/folder with the container using the --volume parameter. The format is as follows:
+
+docker run -p 80:80 -v [absolute_path_local]:[absolute_path_container]
+For example:
+
+docker run -p 80:80 -v /path_to_your_project/app/main.py:/code/app/main.py
+This command creates a volume between the local main.py file and the container's main.py, allowing changes made locally to be automatically reflected in the container.
+
+Now, your project is running in “reloading” mode. Whenever you modify and save the local main.py, the code inside the container's main.py will automatically refresh, thanks to Uvicorn's reloading feature.

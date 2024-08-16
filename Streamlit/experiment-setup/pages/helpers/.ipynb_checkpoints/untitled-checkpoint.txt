@@ -1,0 +1,20 @@
+If i press update content button, this is the content in session state
+{
+"Phase 1":{
+"farts a lot_contentE_Phase 1_0":"Hello!"
+"farts a lot_contentA_Phase 1_0":"Experiencing this issue suggests you have a keen awareness of your body's reactions. It's great that you're attentive to your health."
+"farts a lot_contentB_Phase 1_0":"On the other hand, frequent gas impacts comfort, focus, and professionalism in senior roles."
+"farts a lot_contentD_Phase 1_0":"Consider automating a lactoid-free milk solution?"
+"Phase 1_farts a lot":"Consider automating a lactoid-free milk solution?"
+}
+}
+
+Without update content button
+{
+"Phase 1":{
+"farts a lot_contentE_Phase 1_0":"Hello!"
+"farts a lot_contentA_Phase 1_0":"This issue may currently affect your daily routine, indicating your thoughtful attention to your health and well-being."
+"farts a lot_contentB_Phase 1_0":"On the other hand, excessive flatulence can hinder productivity, focus, and professional image."
+"farts a lot_contentD_Phase 1_0":"Thought about automating the process?"
+}
+}
